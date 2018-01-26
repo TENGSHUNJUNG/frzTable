@@ -15,13 +15,63 @@
 // Components / Modules Setting
 // -------------------------------------
 // 請輸入您的ClassName
-$classname: '18.Magaele jQuery Plugin';
+$classname: 'frzTable';
 // -------------------------------------
 // 您的CSS Code
 // -------------------------------------
 //以下範例可以刪除，改為您自已的CSS Code
 .#{$classname} {
-	// style on phone device
+	.title{
+		width: 100%;
+		height: 50px; 
+		display: flex;
+		.title_bg{
+		background:#eaedf2; 
+		width: 90px; 
+		height: 50px;
+		border: 1px solid #e2e2e2;
+	}
+	}
+	.td1_title{
+		width: 90px ;
+		background:#f1f1f1;
+		.td1_left{
+		background:#f1f1f1; 
+		width: 90px; 
+		height: 50px;
+		border: 1px solid #e2e2e2;
+	}
+	}
+	.td2{
+		width: 100%; 
+		height: 50px; 
+		display: flex;
+		.td2_content{
+			background:#ffffff; 
+			width: 90px; 
+			height: 50px;
+			border: 1px solid #e2e2e2;
+		}
+	}
+	.active{
+		border:1px solid #fe8b88!important;
+		background-color: #fff9e3!important;
+	}
+	.bg_gray{
+		background-color: #f7f7f7!important;
+	}
+	.slide_btn{
+		position: absolute;
+		background-color: #b2b2b2;
+		top:50%;
+		margin-top: -20px;
+		padding:20px 10px;
+		cursor: pointer;
+	}
+	.slide_right{
+		right: 0;
+	}
+
 	@media screen and (min-width: $screen-tablet) {
 		// style on tablet device
 	}
@@ -31,7 +81,7 @@ $classname: '18.Magaele jQuery Plugin';
 	@media screen and (min-width: $screen-lg-desktop) {
 		// style on desktop device
 	}
-	&.#{$classname}_modifier {
+	&.#{$classname}_default {
 		
 	}
 	& > .#{$classname}_child {

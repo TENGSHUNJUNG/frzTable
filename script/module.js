@@ -1,6 +1,17 @@
-const ModuleName = '18.Magaele jQuery Plugin';
+const ModuleName = 'frzTable';
 const ModuleDefaults =  {
-	properties: value
+    count: {
+
+        slide: 1, 
+
+        show: 4  
+    },
+
+    speed: .3, 
+
+    whenClick: function($element) {
+
+    }
 };
 const ModuleReturns = [];
 
@@ -11,9 +22,21 @@ class Module {
 		this.option = options;
 	}
 	init () {
+		let options = this.options;
+
+
+
+		this.onClick();
 		return this;
 	}
-	methods () {
+	onClick () {
+	    $('.td2_content').on('click',function(){
+	    	let thisDiv = $(this).index()+1;
+	    	$('.td2_content').removeClass('active').removeClass('bg_gray');       
+	    	$('.td2_content:nth-child('+ thisDiv +')').addClass('bg_gray');
+	    	$(this).removeClass('bg_gray').addClass('active').siblings().addClass('bg_gray');
+	    });
+		
 		return this;
 	}
 };
