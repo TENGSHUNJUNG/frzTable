@@ -21,40 +21,43 @@ $classname: 'frzTable';
 // -------------------------------------
 //以下範例可以刪除，改為您自已的CSS Code
 .#{$classname} {
-	.title{
-		width: 100%;
-		height: 50px; 
-		display: flex;
-		.title_bg{
+	.title_bg{
 		background:#eaedf2; 
-		width: 90px; 
+		// width: 90px; 
 		height: 50px;
 		border: 1px solid #e2e2e2;
-	}
+		text-align: center;
 	}
 	.td1_title{
-		width: 90px ;
+		// width: 90px ;
 		background:#f1f1f1;
 		.td1_left{
-		background:#f1f1f1; 
-		width: 90px; 
+		background:#f1f1f1;
+		text-align: center; 
+		// width: 90px; 
 		height: 50px;
+		line-height: 50px;
 		border: 1px solid #e2e2e2;
 	}
 	}
 	.td2_wrap{
 		position: relative;
-		width: 630px;
-	}
-	.td2{
-		width: 630px; 
-		height: 50px; 
-		display: flex;
-		.td2_content{
-			background:#ffffff; 
-			width: 90px; 
-			height: 50px;
-			border: 1px solid #e2e2e2;
+		// width: 630px;
+		cursor: pointer;
+		.td2{
+			// width: 630px; 
+			height: 50px; 
+			display: flex;
+			.td2_content{
+				position: relative;
+				left:0px;
+				text-align: center;
+				background:#ffffff; 
+				// width: 90px; 
+				height: 50px;
+				line-height: 50px;
+				border: 1px solid #e2e2e2;
+				}
 		}
 	}
 	.active{
@@ -65,7 +68,9 @@ $classname: 'frzTable';
 		background-color: #f7f7f7!important;
 	}
 	.slide_btn{
+		opacity: .5;
 		position: absolute;
+		z-index: 999;
 		background-color: #b2b2b2;
 		top:50%;
 		margin-top: -20px;
@@ -74,6 +79,35 @@ $classname: 'frzTable';
 	}
 	.slide_right{
 		right: 0;
+	}
+	.over_h{
+		overflow: hidden;
+	}
+	.text_gray{
+		color: #a1a1a1;
+	}
+	.display_n{
+		display: none;
+	}
+	.cheaper{
+		position: absolute;
+		border-style: solid;
+		border-width: 20px 20px 0 0;
+		border-color: #ff8e26 transparent transparent transparent;
+	}
+	.cheaper_text{
+		width: 100%;
+		color: #ff8e26;
+		position: absolute;
+		margin-top: -15px;
+	}
+	.back{
+		text-align: right;
+		margin-right: 5px;
+	}
+	.go{
+		text-align: left;
+		margin: 5px 0 0 5px;
 	}
 
 	@media screen and (min-width: $screen-tablet) {

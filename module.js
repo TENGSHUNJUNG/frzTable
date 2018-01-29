@@ -181,7 +181,7 @@ module.exports = g;
 
 
 Object.defineProperty(exports, "__esModule", {
-				value: true
+	value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -190,51 +190,119 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var ModuleName = 'frzTable';
 var ModuleDefaults = {
-				count: {
-
-								slide: 1,
-
-								show: 4
-				},
-
-				speed: .3,
-
-				whenClick: function whenClick($element) {}
+	count: {
+		// M版時每次點擊往前往後移動幾格儲存格
+		slide: 2, // [number] 
+		// M版時一個畫面show幾格儲存格
+		show: 4 // [number] 
+	},
+	// 設定花多久時間移動完成
+	speed: .3, // [number] 
+	// 每次點擊儲存格時會執行此callback，並帶入所點擊的儲存格jquery物件
+	whenClick: function whenClick($element) {
+		// console.log($element)
+	}
 };
-var ModuleReturns = [];
+var ModuleReturns = ['output', 'methods'];
 
 var Module = function () {
-				function Module(ele, options) {
-								_classCallCheck(this, Module);
+	function Module(ele, options) {
+		_classCallCheck(this, Module);
 
-								this.ele = ele;
-								this.$ele = $(ele);
-								this.option = options;
+		this.ele = ele;
+		this.$ele = $(ele);
+		this.option = options;
+	}
+
+	_createClass(Module, [{
+		key: 'init',
+		value: function init() {
+
+			var slideStar = 0;
+			var divSlide = ModuleDefaults.count.slide;
+			var speed = parseFloat(ModuleDefaults.speed) * 1000;
+			var srcollWidth = $('.td2_content').width() + 1.5;
+
+			$(".slide_left").on('click', function () {
+				if (slideStar - divSlide >= 0) {
+					slideStar = slideStar - divSlide;
+					console.log(slideStar);
+					Module.prototype.onClickLeft();
 				}
+			});
 
-				_createClass(Module, [{
-								key: 'init',
-								value: function init() {
-												var options = this.options;
+			$(".slide_right").on('click', function () {
+				if (slideStar + divSlide <= 7) {
+					slideStar = slideStar + divSlide;
+					console.log(slideStar);
+					Module.prototype.onClickRight();
+				}
+			});
 
-												this.onClick();
-												return this;
-								}
-				}, {
-								key: 'onClick',
-								value: function onClick() {
-												$('.td2_content').on('click', function () {
-																var thisDiv = $(this).index() + 1;
-																$('.td2_content').removeClass('active').removeClass('bg_gray');
-																$('.td2_content:nth-child(' + thisDiv + ')').addClass('bg_gray');
-																$(this).removeClass('bg_gray').addClass('active').siblings().addClass('bg_gray');
-												});
+			this.changeWindow();
+			this.onClickDiv();
+			return this;
+		}
+	}, {
+		key: 'changeWindow',
+		value: function changeWindow() {
+			var windowWidth = $(window).width();
+			if (windowWidth >= 1024) {
+				$('.slide_btn').addClass('display_n');
+				var divShow = $(".td2").width() / 7;
+				$(".td2_content").width(divShow);
+			} else {
+				Module.prototype.showDiv();
+			}
+			return this;
+		}
+	}, {
+		key: 'showDiv',
+		value: function showDiv() {
+			var show = parseInt(ModuleDefaults.count.show);
+			var divShow = ($(".td2").width() - show) / show;
+			$(".td2_content").width(divShow);
+			$('.td2').width((divShow + 1) * 7);
 
-												return this;
-								}
-				}]);
+			return this;
+		}
+	}, {
+		key: 'onClickLeft',
+		value: function onClickLeft() {
+			var divSlide = parseInt(ModuleDefaults.count.slide);
+			var srcollWidth = ($('.td2_content').width() + 1.5) * divSlide;
+			var speed = parseFloat(ModuleDefaults.speed) * 1000;
+			$(".td2_content").animate({
+				left: "+=" + srcollWidth + ""
+			}, speed);
+			return this;
+		}
+	}, {
+		key: 'onClickRight',
+		value: function onClickRight() {
+			var divSlide = ModuleDefaults.count.slide;
+			var srcollWidth = ($('.td2_content').width() + 1.5) * divSlide;
+			var speed = parseFloat(ModuleDefaults.speed) * 1000;
+			$(".td2_content").animate({
+				left: "-=" + srcollWidth + ""
+			}, speed);
+			return this;
+		}
+	}, {
+		key: 'onClickDiv',
+		value: function onClickDiv() {
+			$('.td2_content').on('click', function () {
+				var thisDiv = $(this).index() + 1;
+				$('.td2_content').removeClass('active').removeClass('bg_gray');
+				$('.td2_content:nth-child(' + thisDiv + ')').addClass('bg_gray');
+				$(this).removeClass('bg_gray').addClass('active').siblings().addClass('bg_gray');
+			});
 
-				return Module;
+			return this;
+		}
+	}]);
+
+	return Module;
 }();
 
 ;
