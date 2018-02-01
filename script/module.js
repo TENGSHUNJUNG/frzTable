@@ -2,7 +2,7 @@ const ModuleName = 'frzTable';
 const ModuleDefaults =  {
 	    count: {
 	        // M版時每次點擊往前往後移動幾格儲存格
-	        slide: 3, // [number] 
+	        slide: 1, // [number] 
 	        // M版時一個畫面show幾格儲存格
 	        show: 3 // [number],M版寬最大顯示4筆資料 
 	    },
@@ -31,6 +31,10 @@ class Module {
         let $slide_left = $this.find('.slide_left');
         let $slide_right = $this.find('.slide_right');
 		let $td2_content = $this.find( '.td2_content' ) ;
+		let slide = ModuleDefaults.count.slide ;
+		let divSlide = ModuleDefaults.count.slide ;
+		let show = ModuleDefaults.count.show;
+		let speed = ModuleDefaults.count.speed;
 
 
 
@@ -45,7 +49,7 @@ class Module {
 		// })
 
 
-		// slide_right.on('click',function(){
+		
 		// 	if( divSlide + show <=7 ){
 		// 		divSlide = divSlide + show ;
 		// 		Module.prototype.onClickRight();
@@ -63,7 +67,24 @@ class Module {
 
 
 		$slide_right.on('click',function(){
-			self.onClickRight();
+			if( slide === 1 ){
+				if( divSlide + show <=7 ){
+					self.onClickRight();
+				}
+			}else{
+				if( divSlide + show <=7 ){
+					divSlide = divSlide + show ;
+					console.log(divSlide);
+					self.onClickRight();
+				} else if( 7 - divSlide >= 0 ){
+					let divWidth = ($('.td2_content').width() +2 ) * ( 7 - divSlide ) ;
+					console.log(divSlide);
+	                $('.td2_content').animate({
+	                    left: "-=" + divWidth + "",
+	                }, speed);
+	                divSlide = divSlide + show ;
+				}
+			}
 		});
 
 
@@ -73,13 +94,16 @@ class Module {
 
 
 	changeWindow () {
+		let self = this ;
+		let $this = this.$ele
+		let $td2_content = $this.find( '.td2_content' ) ;
 		let windowWidth = $(window).width();
 		let  divShow = ( $(".td2_wrap").width() / 7 ) -2 ;
 		if(windowWidth >= 768){
 			$('.slide_btn').addClass('display_n');
-			$(".td2_content").width(divShow);
+			$td2_content.width(divShow);
 		}else{
-			Module.prototype.showDiv();
+			self.showDiv();
 		}
 	}
 
@@ -88,7 +112,7 @@ class Module {
 		let self = this ;
 		let $this = this.$ele
 		let $td2_content = $this.find( '.td2_content' ) ;
-		let $td2_box = this.find('.td2_box');
+		let $td2_box = $this.find('.td2_box');
 		let show = ModuleDefaults.count.show;
 		let divShow = ( $(".td2_wrap").width() / show ) ;
 		$td2_content.width(divShow);
@@ -101,7 +125,7 @@ class Module {
 		let $this = this.$ele
 		let $td2_content = $this.find( '.td2_content' ) ;
 		let divSlide = ModuleDefaults.count.slide;
-		let srcollWidth = ($('.td2_content').width() + 2) * divSlide;
+		let srcollWidth = ($td2_content.width() + 2) * divSlide + 1.5;
 		let speed = ModuleDefaults.speed * 1000;
 			$td2_content.animate({
 				left: "+="+ srcollWidth +"",
@@ -114,7 +138,7 @@ class Module {
 		let $this = this.$ele
 		let $td2_content = $this.find( '.td2_content' ) ;
 		let divSlide = ModuleDefaults.count.slide;
-		let srcollWidth = ($('.td2_content').width() + 2) * divSlide;
+		let srcollWidth = ($('.td2_content').width() + 2) * divSlide + 1.5;
 		let speed = ModuleDefaults.speed*1000;
 			$td2_content.animate({
 				left: "-="+ srcollWidth +"",
@@ -128,9 +152,9 @@ class Module {
 		let $td2_content = $this.find( '.td2_content' ) ;
 		let $title_bg = $this.find('.title_bg');
 
-	    td2_content.on('click',function(){
+	    $td2_content.on('click',function(){
 	    	let thisDiv = $(this).index()+1;
-	    	td2_content.removeClass('active').removeClass('bg_gray');       
+	    	$td2_content.removeClass('active').removeClass('bg_gray');       
 	    	$this.find('.td2_content:nth-child('+ thisDiv +')').addClass('bg_gray');
 	    	$title_bg.removeClass('bg_gray');
 	    	$(this).removeClass('bg_gray').addClass('active').siblings().addClass('bg_gray');
