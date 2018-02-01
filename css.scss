@@ -166,6 +166,15 @@ $classname: 'frzTable';
 	.air_td2_content{
 		@extend .td2_content;
 	}
+	.air_box{
+		margin-top: -72px;
+		margin-left: 45px;
+		.ic-ln{
+			color: #ff8e26;
+			font-size: 14px;
+		}
+
+	}
 	@media screen and (min-width: $screen-phone) {
 		.td2_wrap{
 			width: 320px;

@@ -280,7 +280,6 @@ var Module = function () {
 				}
 			});
 
-			if (show - slide) {}
 			$this.find(".sliderBall:first-child").addClass('activeBall');
 
 			this.changeWindow();
@@ -354,6 +353,7 @@ var Module = function () {
 				$this.find('.td2_content:nth-child(' + thisDiv + ')').addClass('bg_gray');
 				$title_bg.removeClass('bg_gray');
 				$(this).removeClass('bg_gray').addClass('active').siblings().addClass('bg_gray');
+				$this.find('.sliderBall:nth-child(' + thisDiv + ')').addClass('activeBall').siblings().removeClass('activeBall');
 			});
 		}
 	}, {
@@ -374,11 +374,17 @@ var Module = function () {
 
 				$(this).addClass('active');
 				var title_active = $this.find('.active').parent().index() - 1;
-				$this.find('.td1_left').removeClass('air_color');
-				$this.find('.td1_left:nth-child(' + title_active + ')').addClass('air_color');
+				$this.find('.left_air').removeClass('air_color');
+				// $this.find('.air_box').addClass('display_n');
+				// $this.find('.air_box:nth-child('+ title_active +')').removeClass('display_n');
+				$this.find('.left_air:nth-child(' + title_active + ')').addClass('air_color');
+
+				//桌機
+
 
 				$this.find('.td1_left_m').removeClass('air_color');
 				$this.find('.td1_left_m:nth-child(' + title_active + ')').addClass('air_color');
+				//	手機
 			});
 		}
 	}]);
