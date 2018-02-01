@@ -25,134 +25,49 @@ class Module {
 
 
 	init () {
-		this.changeWindow();
+		let self = this ;
+		let $this = this.$ele
+		let options = this.option;
+        let $slide_left = $this.find('.slide_left');
+        let $slide_right = $this.find('.slide_right');
+		let $td2_content = $this.find( '.td2_content' ) ;
 
-		let slideStar = 0 ;
-		let divSlide = ModuleDefaults.count.slide;
-		let show = ModuleDefaults.count.show;
-		let speed = parseFloat(ModuleDefaults.speed)*1000;
-		let td2_content = $( ".td2_content" ) ;
-		let slide_right = $(".slide_right") ;
-		let slide_left = $(".slide_left") ;
-		let srcollWidth = ($('.td2_content').width() + 2 ) ;
-		let srcollWidth_2 = ($('.td2_content').width() + 2 ) * 2 ;
-		let srcollWidth_3 = ($('.td2_content').width() + 2 ) * 3 ;
-		let page = divSlide / show ;
-		console.log(page)
-
-
-
-
-		// slide_right.on('click',function(){
-		// 	if( page>=1 ){
-		// 		Module.prototype.onClickRight();	
-		// 	}
-			
-		// });
 
 
 		// slide_left.on('click',function(){
-		// 	Module.prototype.onClickLeft();
-		// });
+		// 	let changShow = ModuleDefaults.count.show;
+		// 	if( changShow - show > 0 && divSlide !== 1 ){
+		// 		changShow = changShow - divSlide;
+		// 		Module.prototype.onClickLeft();
+		// 	}else if(){
+				
+		// 	}
+		// })
 
 
-
-
-
-
-
-
-
-
-
-
-		// if( show >= divSlide ){
-		// 	slide_left.addClass('display_n');
-		// };
-
-		slide_left.on('click',function(){
-			// if( show+1 >= divSlide ){
-			// 	slide_left.addClass('display_n');
-			// 	slide_right.removeClass('display_n');
-			// }else{
-			// 	slide_left.removeClass('display_n');
-			// }
-			if( divSlide === 3 ){  //show 2 slider 2
-				divSlide = divSlide - 1 ;
-				console.log(divSlide,'left1');
-				td2_content.animate({
-					left: "+="+ srcollWidth +"",
-				},speed);
-			}else if( divSlide === 4 ){ //show 3 slider 2
-				divSlide = divSlide - 2 ;
-				console.log(divSlide,'left2');
-				td2_content.animate({
-					left: "+="+ srcollWidth_2 +"",
-				},speed);
-			}else if( divSlide === 6 ){ //show 4 slider 2
-				divSlide = divSlide - 4 ;
-				console.log(divSlide,'left3');
-				td2_content.animate({
-					left: "+="+ srcollWidth_2 +"",
-				},speed);
-			
-			}else if( divSlide - show+1 >= show ){ 
-		        divSlide = divSlide - show ;
-		        console.log(divSlide,'left4');
-		        Module.prototype.onClickLeft();
-			}
+		// slide_right.on('click',function(){
+		// 	if( divSlide + show <=7 ){
+		// 		divSlide = divSlide + show ;
+		// 		Module.prototype.onClickRight();
+		// 	} else if( 7 - divSlide > 0 ){
+		// 		let divWidth = ($('.td2_content').width() +2 ) * ( 7 - divSlide ) ;
+  //               $('.td2_content').animate({
+  //                   left: "-=" + divWidth + "",
+  //               }, speed);
+  //            // divSlide = divSlide + ( 7 - divSlide );   
+		// 	}
+		// })
+		$slide_left.on('click',function(){
+			self.onClickLeft();
 		});
 
 
-
-
-
-
-		slide_right.on('click',function(){
-			// if( divSlide+1 >= 6){
-			// 	slide_right.addClass('display_n');
-			// 	slide_left.removeClass('display_n');
-			// }else{
-			// 	slide_right.removeClass('display_n');
-			// };
-
-			if( divSlide === 1 ){
-				slide_left.removeClass('display_n');
-				if( slideStar + show < 7 ){
-					slideStar = slideStar + divSlide ;
-					Module.prototype.onClickRight();
-				}
-			}else{
-				slide_left.removeClass('display_n');
-				if( show + divSlide <= 7 ){ 
-			        divSlide = divSlide + show ;
-			        console.log(divSlide)
-			        Module.prototype.onClickRight();
-				}else if( 7 - divSlide === 1 ){
-					divSlide = divSlide + 1 ;
-					console.log(divSlide,'是1');
-					td2_content.animate({
-						left: "-="+ srcollWidth +"",
-					},speed);
-				}else if( 7 - divSlide === 2 ){
-					divSlide = divSlide + 2 ;
-					console.log(divSlide,'是2');
-					td2_content.animate({
-						left: "-="+ srcollWidth_2 +"",
-					},speed);
-				}else if( 7 - divSlide === 4 ){ //show4 slider3
-					divSlide = divSlide + 4 ;
-					console.log(divSlide,'是3');
-					td2_content.animate({
-						left: "-="+ srcollWidth_3 +"",
-					},speed);
-				}else{
-					console.log('滑動數量大於顯示數量');
-				}
-			}
+		$slide_right.on('click',function(){
+			self.onClickRight();
 		});
 
 
+		this.changeWindow();
 		this.onClickDiv();
 	}
 
@@ -170,40 +85,54 @@ class Module {
 
 
 	showDiv () {
-		let show = parseInt(ModuleDefaults.count.show);
+		let self = this ;
+		let $this = this.$ele
+		let $td2_content = $this.find( '.td2_content' ) ;
+		let $td2_box = this.find('.td2_box');
+		let show = ModuleDefaults.count.show;
 		let divShow = ( $(".td2_wrap").width() / show ) ;
-		$(".td2_content").width(divShow);
-		$('.td2_box').width( divShow * 7 );
+		$td2_content.width(divShow);
+		$td2_box.width( divShow * 7 );
 	}
 
 
 	onClickLeft () {
-		let divSlide = parseInt(ModuleDefaults.count.slide);
+		let self = this ;
+		let $this = this.$ele
+		let $td2_content = $this.find( '.td2_content' ) ;
+		let divSlide = ModuleDefaults.count.slide;
 		let srcollWidth = ($('.td2_content').width() + 2) * divSlide;
-		let speed = parseFloat(ModuleDefaults.speed)*1000;
-			$(".td2_content").animate({
+		let speed = ModuleDefaults.speed * 1000;
+			$td2_content.animate({
 				left: "+="+ srcollWidth +"",
 			},speed);
 	}
 
 
 	onClickRight () {
+		let self = this ;
+		let $this = this.$ele
+		let $td2_content = $this.find( '.td2_content' ) ;
 		let divSlide = ModuleDefaults.count.slide;
 		let srcollWidth = ($('.td2_content').width() + 2) * divSlide;
-		let speed = parseFloat(ModuleDefaults.speed)*1000;
-			$( ".td2_content" ).animate({
+		let speed = ModuleDefaults.speed*1000;
+			$td2_content.animate({
 				left: "-="+ srcollWidth +"",
 			},speed);
 	}
 
 
 	onClickDiv () {
-		let td2_content = $('.td2_content') ;
+		let self = this ;
+		let $this = this.$ele
+		let $td2_content = $this.find( '.td2_content' ) ;
+		let $title_bg = $this.find('.title_bg');
+
 	    td2_content.on('click',function(){
 	    	let thisDiv = $(this).index()+1;
 	    	td2_content.removeClass('active').removeClass('bg_gray');       
-	    	$('.td2_content:nth-child('+ thisDiv +')').addClass('bg_gray');
-	    	$('.title_bg').removeClass('bg_gray');
+	    	$this.find('.td2_content:nth-child('+ thisDiv +')').addClass('bg_gray');
+	    	$title_bg.removeClass('bg_gray');
 	    	$(this).removeClass('bg_gray').addClass('active').siblings().addClass('bg_gray');
 	    });
 	}
