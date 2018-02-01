@@ -192,7 +192,7 @@ var ModuleName = 'frzTable';
 var ModuleDefaults = {
 	count: {
 		// M版時每次點擊往前往後移動幾格儲存格
-		slide: 3, // [number] 
+		slide: 2, // [number] 
 		// M版時一個畫面show幾格儲存格
 		show: 3 // [number],M版寬最大顯示4筆資料 
 	},
@@ -215,172 +215,170 @@ var Module = function () {
 	}
 
 	_createClass(Module, [{
-		key: "init",
+		key: 'init',
 		value: function init() {
-			this.changeWindow();
-
-			var slideStar = 0;
+			var self = this;
+			var $this = this.$ele;
+			var options = this.option;
+			var $slide_left = $this.find('.slide_left');
+			var $slide_right = $this.find('.slide_right');
+			var $td2_content = $this.find('.td2_content');
+			var $sliderBall = $this.find('.sliderBall');
+			var slide = ModuleDefaults.count.slide;
 			var divSlide = ModuleDefaults.count.slide;
 			var show = ModuleDefaults.count.show;
-			var speed = parseFloat(ModuleDefaults.speed) * 1000;
-			var td2_content = $(".td2_content");
-			var slide_right = $(".slide_right");
-			var slide_left = $(".slide_left");
-			var srcollWidth = $('.td2_content').width() + 2;
-			var srcollWidth_2 = ($('.td2_content').width() + 2) * 2;
-			var srcollWidth_3 = ($('.td2_content').width() + 2) * 3;
-			var page = divSlide / show;
-			console.log(page);
+			var speed = ModuleDefaults.count.speed;
 
-			// slide_right.on('click',function(){
-			// 	if( page>=1 ){
-			// 		Module.prototype.onClickRight();	
-			// 	}
-
-			// });
-
-
-			// slide_left.on('click',function(){
-			// 	Module.prototype.onClickLeft();
-			// });
-
-
-			// if( show >= divSlide ){
-			// 	slide_left.addClass('display_n');
-			// };
-
-			slide_left.on('click', function () {
-				// if( show+1 >= divSlide ){
-				// 	slide_left.addClass('display_n');
-				// 	slide_right.removeClass('display_n');
-				// }else{
-				// 	slide_left.removeClass('display_n');
-				// }
-				if (divSlide === 3) {
-					//show 2 slider 2
-					divSlide = divSlide - 1;
-					console.log(divSlide, 'left1');
-					td2_content.animate({
-						left: "+=" + srcollWidth + ""
-					}, speed);
-				} else if (divSlide === 4) {
-					//show 3 slider 2
-					divSlide = divSlide - 2;
-					console.log(divSlide, 'left2');
-					td2_content.animate({
-						left: "+=" + srcollWidth_2 + ""
-					}, speed);
-				} else if (divSlide === 6) {
-					//show 4 slider 2
-					divSlide = divSlide - 4;
-					console.log(divSlide, 'left3');
-					td2_content.animate({
-						left: "+=" + srcollWidth_2 + ""
-					}, speed);
-				} else if (divSlide - show + 1 >= show) {
-					divSlide = divSlide - show;
-					console.log(divSlide, 'left4');
-					Module.prototype.onClickLeft();
-				}
-			});
-
-			slide_right.on('click', function () {
-				// if( divSlide+1 >= 6){
-				// 	slide_right.addClass('display_n');
-				// 	slide_left.removeClass('display_n');
-				// }else{
-				// 	slide_right.removeClass('display_n');
-				// };
-
-				if (divSlide === 1) {
-					slide_left.removeClass('display_n');
-					if (slideStar + show < 7) {
-						slideStar = slideStar + divSlide;
-						Module.prototype.onClickRight();
+			$slide_left.on('click', function () {
+				if (slide === 1) {
+					if (7 - divSlide >= 0 && divSlide !== 1) {
+						divSlide = divSlide - slide;
+						console.log(divSlide, 'left slide=1');
+						self.onClickLeft();
 					}
 				} else {
-					slide_left.removeClass('display_n');
-					if (show + divSlide <= 7) {
-						divSlide = divSlide + show;
-						console.log(divSlide);
-						Module.prototype.onClickRight();
-					} else if (7 - divSlide === 1) {
-						divSlide = divSlide + 1;
-						console.log(divSlide, '是1');
-						td2_content.animate({
-							left: "-=" + srcollWidth + ""
+					console.log(divSlide, 'left初始');
+					if (divSlide - show > 0 && divSlide > show * 2 && divSlide !== 1) {
+						divSlide = divSlide - slide;
+						console.log(divSlide, 'left1');
+						self.onClickLeft();
+					} else if (divSlide - show > 0 && divSlide <= show * 2) {
+						var divWidth = ($td2_content.width() + 2) * (divSlide - show) + .5; //show4 slider2的話會直接滑到最頭
+						console.log(divSlide, 'left 2');
+						$td2_content.animate({
+							left: "+=" + divWidth + ""
 						}, speed);
-					} else if (7 - divSlide === 2) {
-						divSlide = divSlide + 2;
-						console.log(divSlide, '是2');
-						td2_content.animate({
-							left: "-=" + srcollWidth_2 + ""
-						}, speed);
-					} else if (7 - divSlide === 4) {
-						//show4 slider3
-						divSlide = divSlide + 4;
-						console.log(divSlide, '是3');
-						td2_content.animate({
-							left: "-=" + srcollWidth_3 + ""
-						}, speed);
-					} else {
-						console.log('滑動數量大於顯示數量');
+						divSlide = slide;
 					}
 				}
 			});
 
+			$slide_right.on('click', function () {
+				$this.find(".sliderBall:first-child").removeClass('activeBall');
+				console.log(divSlide, '初始');
+				if (slide === 1) {
+					if (divSlide + show <= 7) {
+						divSlide = divSlide + slide;
+						console.log(divSlide, 'right slide=1');
+						self.onClickRight();
+					}
+				} else {
+					if (divSlide + show <= 7) {
+						divSlide = divSlide + show;
+						console.log(divSlide, 'right1');
+						self.onClickRight();
+					} else if (7 - divSlide > 0) {
+						var divWidth = ($td2_content.width() + 2) * (7 - divSlide) + .5;
+						console.log(divSlide, 'right2');
+						$td2_content.animate({
+							left: "-=" + divWidth + ""
+						}, speed);
+						divSlide = divSlide + (7 - divSlide);
+						console.log(divSlide, 'right_ends');
+						// $this.find(".sliderBall:nth-child( " + ( divSlide - 1 ) + " )").addClass('activeBall') ;
+					}
+				}
+			});
+
+			if (show - slide) {}
+			$this.find(".sliderBall:first-child").addClass('activeBall');
+
+			this.changeWindow();
 			this.onClickDiv();
+			this.airOnClick();
 		}
 	}, {
-		key: "changeWindow",
+		key: 'changeWindow',
 		value: function changeWindow() {
+			var self = this;
+			var $this = this.$ele;
+			var $td2_content = $this.find('.td2_content');
 			var windowWidth = $(window).width();
 			var divShow = $(".td2_wrap").width() / 7 - 2;
 			if (windowWidth >= 768) {
 				$('.slide_btn').addClass('display_n');
-				$(".td2_content").width(divShow);
+				$td2_content.width(divShow);
 			} else {
-				Module.prototype.showDiv();
+				self.showDiv();
 			}
 		}
 	}, {
-		key: "showDiv",
+		key: 'showDiv',
 		value: function showDiv() {
-			var show = parseInt(ModuleDefaults.count.show);
+			var self = this;
+			var $this = this.$ele;
+			var $td2_content = $this.find('.td2_content');
+			var $td2_box = $this.find('.td2_box');
+			var show = ModuleDefaults.count.show;
 			var divShow = $(".td2_wrap").width() / show;
-			$(".td2_content").width(divShow);
-			$('.td2_box').width(divShow * 7);
+			$td2_content.width(divShow);
+			$td2_box.width(divShow * 7);
 		}
 	}, {
-		key: "onClickLeft",
+		key: 'onClickLeft',
 		value: function onClickLeft() {
-			var divSlide = parseInt(ModuleDefaults.count.slide);
-			var srcollWidth = ($('.td2_content').width() + 2) * divSlide;
-			var speed = parseFloat(ModuleDefaults.speed) * 1000;
-			$(".td2_content").animate({
+			var self = this;
+			var $this = this.$ele;
+			var $td2_content = $this.find('.td2_content');
+			var divSlide = ModuleDefaults.count.slide;
+			var srcollWidth = ($td2_content.width() + 2) * divSlide + .5;
+			var speed = ModuleDefaults.speed * 1000;
+			$td2_content.animate({
 				left: "+=" + srcollWidth + ""
 			}, speed);
 		}
 	}, {
-		key: "onClickRight",
+		key: 'onClickRight',
 		value: function onClickRight() {
+			var self = this;
+			var $this = this.$ele;
+			var $td2_content = $this.find('.td2_content');
 			var divSlide = ModuleDefaults.count.slide;
-			var srcollWidth = ($('.td2_content').width() + 2) * divSlide;
-			var speed = parseFloat(ModuleDefaults.speed) * 1000;
-			$(".td2_content").animate({
+			var srcollWidth = ($('.td2_content').width() + 2) * divSlide + .5;
+			var speed = ModuleDefaults.speed * 1000;
+			$td2_content.animate({
 				left: "-=" + srcollWidth + ""
 			}, speed);
 		}
 	}, {
-		key: "onClickDiv",
+		key: 'onClickDiv',
 		value: function onClickDiv() {
-			var td2_content = $('.td2_content');
-			td2_content.on('click', function () {
+			var self = this;
+			var $this = this.$ele;
+			var $td2_content = $this.find('.td2_content');
+			var $title_bg = $this.find('.title_bg');
+
+			$td2_content.on('click', function () {
 				var thisDiv = $(this).index() + 1;
-				td2_content.removeClass('active').removeClass('bg_gray');
-				$('.td2_content:nth-child(' + thisDiv + ')').addClass('bg_gray');
-				$('.title_bg').removeClass('bg_gray');
+				$td2_content.removeClass('active').removeClass('bg_gray');
+				$this.find('.td2_content:nth-child(' + thisDiv + ')').addClass('bg_gray');
+				$title_bg.removeClass('bg_gray');
 				$(this).removeClass('bg_gray').addClass('active').siblings().addClass('bg_gray');
+			});
+		}
+	}, {
+		key: 'airOnClick',
+		value: function airOnClick() {
+			var self = this;
+			var $this = this.$ele;
+			var $air_td2_content = $this.find('.air_td2_content');
+			var $title_bg = $this.find('.title_bg');
+
+			$air_td2_content.on('click', function () {
+				var thisDiv = $(this).index() + 1;
+				var thisFirst = $(this).index() + 1;
+				$air_td2_content.removeClass('active').removeClass('bg_gray');
+				$this.find('.air_td2_content:nth-child(' + thisDiv + ')').removeClass('bg_gray');
+				$this.find('.air_td2_content_head').removeClass('air_color');
+				$this.find('.air_td2_content_head:nth-child(' + thisFirst + ')').addClass('air_color');
+
+				$(this).addClass('active');
+				var title_active = $this.find('.active').parent().index() - 1;
+				$this.find('.td1_left').removeClass('air_color');
+				$this.find('.td1_left:nth-child(' + title_active + ')').addClass('air_color');
+
+				$this.find('.td1_left_m').removeClass('air_color');
+				$this.find('.td1_left_m:nth-child(' + title_active + ')').addClass('air_color');
 			});
 		}
 	}]);
