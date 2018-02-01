@@ -136,12 +136,50 @@ $classname: 'frzTable';
 		height: 40px;
 		line-height: 20px;
 	}
+	.sliderBall{
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background-color: #333333;
+		display: inline-block;
+		position: relative;
+		left:50%;
+	}
+	.activeBall{
+		background-color: red;
+	}
+	.big_text{
+		font-weight: bold;
+		font-size: 14px;
+		text-align: left;
+	}
+	.air_text{
+		height: 30px;
+		width: 100%;
+		line-height: 30px;
+		text-align: left;
+		margin-left: 5px;
+	}
+	.air_color{
+		color: #ff8e26;
+	}
+	.air_td2_content{
+		@extend .td2_content;
+	}
 	@media screen and (min-width: $screen-phone) {
 		.td2_wrap{
 			width: 320px;
 		}
 		.td1_left_m{
 			font-size: 12px;
+		}
+		.go{
+			font-size: 12px;
+			display: block;
+		}
+		.back{
+			font-size: 12px;
+			display: block;
 		}
 	}
 	@media screen and (min-width: $screen-tablet) {
