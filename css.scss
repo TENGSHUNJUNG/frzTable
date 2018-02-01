@@ -15,23 +15,198 @@
 // Components / Modules Setting
 // -------------------------------------
 // 請輸入您的ClassName
-$classname: '18.Magaele jQuery Plugin';
+$classname: 'frzTable';
 // -------------------------------------
 // 您的CSS Code
 // -------------------------------------
 //以下範例可以刪除，改為您自已的CSS Code
 .#{$classname} {
-	// style on phone device
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	.title_bg{
+		background:#eaedf2; 
+		height: 60px;
+		border: 1px solid #e2e2e2;
+		text-align: center;
+		pointer-events: none;
+
+	}
+	.td1_title{
+		background:#f1f1f1;
+		.td1_left{
+		background:#f1f1f1;
+		text-align: center; 
+		height: 60px;
+		line-height: 60px;
+		border: 1px solid #e2e2e2;
+		}
+	}
+	.td1_left_m{
+		@extend .td1_left;
+		height: 70px;
+		display: flex;
+		flex-wrap: wrap;
+		.date_m{
+			width: 100%;
+			height: 20px;
+			line-height: 20px;
+		}
+	}	
+	.td2_wrap{
+		position: relative;
+		cursor: pointer;
+		overflow: hidden;
+		.td2_box{
+			display: flex;
+			.td2_content{
+				position: relative;
+				left:0px;
+				text-align: center;
+				height: 60px;
+				line-height: 60px;
+				border: 1px solid #e2e2e2;
+				}
+		}
+	}
+	.active{
+		border:1px solid #fe8b88!important;
+		background-color: #fff9e3!important;
+	}
+	.bg_gray{
+		background-color: #f7f7f7!important;
+	}
+	.slide_btn{
+		opacity: .8;
+		position: absolute;
+		z-index: 999;
+		background-color: #b2b2b2;
+		top:50%;
+		margin-top: -20px;
+		padding:10px 0px;
+		cursor: pointer;
+	}
+	.slide_right{
+		right: 0;
+	}
+	.text_gray{
+		color: #a1a1a1;
+	}
+	.display_n{
+		display: none;
+	}
+	.cheaper{
+		position: absolute;
+		border-style: solid;
+		border-width: 20px 20px 0 0;
+		border-color: #ff8e26 transparent transparent transparent;
+	}
+	.cheaper_text{
+		width: 20px;
+		height: 20px;
+		width: 100%;
+		color: #ff8e26;
+		display: block;
+		margin-top: -20px;
+	}
+	.back{
+		text-align: right;
+		margin-right: 5px;
+	}
+	.go{
+		text-align: left;
+		margin: 10px 0 0 5px;
+	}
+	.icon{
+		font-size: 20px;
+		padding:10px 0px;
+		color: #fff;
+	}
+	.new_year{
+		width: 80%;
+		height: 20px;
+		font-size: 12px;
+		line-height: 20px;
+		text-align: right;
+		color: #24a07c;
+	}
+	.new_date{
+		width: 100%;
+		height: 40px;
+		line-height: 20px;
+	}
+	.sliderBall{
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background-color: #333333;
+		display: inline-block;
+		position: relative;
+		left:50%;
+	}
+	.activeBall{
+		background-color: red;
+	}
+	.big_text{
+		font-weight: bold;
+		font-size: 14px;
+		text-align: left;
+	}
+	.air_text{
+		height: 30px;
+		width: 100%;
+		line-height: 30px;
+		text-align: left;
+		margin-left: 5px;
+	}
+	.air_color{
+		color: #ff8e26;
+	}
+	.air_td2_content{
+		@extend .td2_content;
+	}
+	.air_box{
+		margin-top: -72px;
+		margin-left: 45px;
+		.ic-ln{
+			color: #ff8e26;
+			font-size: 14px;
+		}
+
+	}
+	@media screen and (min-width: $screen-phone) {
+		.td2_wrap{
+			width: 320px;
+		}
+		.td1_left_m{
+			font-size: 12px;
+		}
+		.go{
+			font-size: 12px;
+			display: block;
+		}
+		.back{
+			font-size: 12px;
+			display: block;
+		}
+	}
 	@media screen and (min-width: $screen-tablet) {
-		// style on tablet device
+		.td2_wrap{
+			width: 650px;
+		}
 	}
 	@media screen and (min-width: $screen-desktop) {
-		// style on desktop device
+		.td2_wrap{
+			width: 850px;
+		}
 	}
 	@media screen and (min-width: $screen-lg-desktop) {
-		// style on desktop device
+		.td2_wrap{
+			width: 1050px;
+		}
 	}
-	&.#{$classname}_modifier {
+	&.#{$classname}_default {
 		
 	}
 	& > .#{$classname}_child {
