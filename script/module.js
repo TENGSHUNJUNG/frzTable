@@ -38,7 +38,7 @@ class Module {
 		let speed = ModuleDefaults.count.speed;
 
 		$slide_left.on('click',function(){
-			if( slide === 1 ){
+			if( slide === 1 && divSlide - show > 0 ){
 				if( 7 - divSlide >= 0 && divSlide !== 1 ){
 					divSlide = divSlide - slide ;
 					console.log(divSlide,'left slide=1')
@@ -50,13 +50,26 @@ class Module {
 					divSlide = divSlide - slide ;
 					console.log(divSlide,'left1')
 					self.onClickLeft();
+
+					//slider
+					$this.find(".sliderBall").removeClass('activeBall');
+					$this.find(".sliderBall:nth-child( " + ( divSlide - 2 ) + " )").addClass('activeBall') ;
+					//slider
+
 				}else if( divSlide - show > 0 && divSlide <= show * 2 ){
-					let divWidth = ($td2_content.width() +2 ) * ( divSlide - show ) +.5; //show4 slider2的話會直接滑到最頭
+					let divWidth = ($td2_content.width() +2 ) * ( divSlide - show ) +.5; //show4 slider2
 						console.log(divSlide,'left 2')
 						$td2_content.animate({
 	                    	left: "+=" + divWidth + "",
 	                	}, speed);
 	                	divSlide = slide ;
+
+
+	                	//slider
+	                	$this.find(".sliderBall").removeClass('activeBall');
+	                	$this.find(".sliderBall:nth-child( " + ( divSlide - 2 ) + " )").addClass('activeBall') ;
+	                	$this.find(".sliderBall:first-child").addClass('activeBall');
+	                	//slider
 	            }   
 			}
 		});
@@ -65,17 +78,23 @@ class Module {
 		$slide_right.on('click',function(){
 			$this.find(".sliderBall:first-child").removeClass('activeBall');
 			console.log(divSlide,'初始')
-			if( slide === 1 ){
+			if( slide === 1 && divSlide + show <7 ){
+					$this.find(".sliderBall:nth-child( " + ( divSlide ) + " )").removeClass('activeBall')
 				if( divSlide + show <=7 ){
 					divSlide = divSlide + slide ;
 					console.log(divSlide,'right slide=1')
 					self.onClickRight();
+					$this.find(".sliderBall:nth-child( " + ( divSlide ) + " )").addClass('activeBall') ;
 				}
 			}else{
 				if( divSlide + show <=7 ){
 					divSlide = divSlide + show ;
 					console.log(divSlide,'right1');
 					self.onClickRight();
+					//slider
+					$this.find(".sliderBall").removeClass('activeBall');
+					$this.find(".sliderBall:nth-child( " + ( divSlide - 2 ) + " )").addClass('activeBall') ;
+					//slider
 				} else if( 7 - divSlide > 0 ){
 					let divWidth = ($td2_content.width() +2 ) * ( 7 - divSlide ) + .5;
 					console.log(divSlide,'right2');
@@ -84,7 +103,10 @@ class Module {
 	                }, speed);
 	                divSlide = divSlide + ( 7 - divSlide ) ;
 	                console.log(divSlide,'right_ends');
-	                // $this.find(".sliderBall:nth-child( " + ( divSlide - 1 ) + " )").addClass('activeBall') ;
+	                //slider
+	                $this.find(".sliderBall").removeClass('activeBall');
+	                $this.find(".sliderBall:nth-child( " + ( divSlide - 2 ) + " )").addClass('activeBall') ;
+	                //slider
 
 				}
 			}
@@ -107,7 +129,6 @@ class Module {
 		let windowWidth = $(window).width();
 		let  divShow = ( $(".td2_wrap").width() / 7 ) -2 ;
 		if(windowWidth >= 768){
-			$('.slide_btn').addClass('display_n');
 			$td2_content.width(divShow);
 		}else{
 			self.showDiv();
@@ -175,26 +196,31 @@ class Module {
 		let $title_bg = $this.find('.title_bg');
 
 	    $air_td2_content.on('click',function(){
-	    	let thisDiv = $(this).index()+1;
 	    	let thisFirst = $(this).index()+1;
 	    	$air_td2_content.removeClass('active').removeClass('bg_gray');
-	    	$this.find('.air_td2_content:nth-child('+ thisDiv +')').removeClass('bg_gray');
 	    	$this.find('.air_td2_content_head').removeClass('air_color');
+	    	$this.find('.air_td2_content_head').children('div:first-child').addClass('display_n');
 	    	$this.find('.air_td2_content_head:nth-child('+ thisFirst +')').addClass('air_color');
+	    	$this.find('.air_td2_content_head:nth-child('+ thisFirst +')').children().removeClass('display_n');
+
+	    	//上方head air_box_m_head
 
 	    	$(this).addClass('active');
 	    	let title_active = $this.find('.active').parent().index()-1;
 	    	$this.find('.left_air').removeClass('air_color');
-	    	// $this.find('.air_box').addClass('display_n');
-	    	// $this.find('.air_box:nth-child('+ title_active +')').removeClass('display_n');
+	    	$this.find('.left_air').children('div:first-child').addClass('display_n');
+	    	$this.find('.left_air:nth-child('+ title_active +')').children().removeClass('display_n');
 	    	$this.find('.left_air:nth-child('+ title_active +')').addClass('air_color');
 
-	    		//桌機
+	    	//左 桌機
 
 
 	    	$this.find('.td1_left_m').removeClass('air_color');
+	    	$this.find('.td1_left_m').children('div:first-child').addClass('display_n');
+	    	$this.find('.td1_left_m:nth-child('+ title_active +')').children().removeClass('display_n');
 	    	$this.find('.td1_left_m:nth-child('+ title_active +')').addClass('air_color');
-	    	//	手機
+
+	    	//左 手機
 	    });
 	}
 };
