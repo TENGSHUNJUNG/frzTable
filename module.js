@@ -224,10 +224,10 @@ var Module = function () {
 			var $slide_right = $this.find('.slide_right');
 			var $td2_content = $this.find('.td2_content');
 			var $sliderBall = $this.find('.sliderBall');
-			var slide = ModuleDefaults.count.slide;
-			var divSlide = ModuleDefaults.count.slide;
-			var show = ModuleDefaults.count.show;
-			var speed = ModuleDefaults.count.speed;
+			var slide = options.count.slide;
+			var divSlide = options.count.slide;
+			var show = options.count.show;
+			var speed = options.count.speed;
 
 			$slide_left.on('click', function () {
 				if (slide === 1 && divSlide - show > 0) {
@@ -325,9 +325,10 @@ var Module = function () {
 		value: function showDiv() {
 			var self = this;
 			var $this = this.$ele;
+			var options = this.option;
 			var $td2_content = $this.find('.td2_content');
 			var $td2_box = $this.find('.td2_box');
-			var show = ModuleDefaults.count.show;
+			var show = options.count.show;
 			var divShow = $(".td2_wrap").width() / show;
 			$td2_content.width(divShow);
 			$td2_box.width(divShow * 7);
@@ -337,10 +338,11 @@ var Module = function () {
 		value: function onClickLeft() {
 			var self = this;
 			var $this = this.$ele;
+			var options = this.option;
 			var $td2_content = $this.find('.td2_content');
-			var divSlide = ModuleDefaults.count.slide;
+			var divSlide = options.count.slide;
 			var srcollWidth = ($td2_content.width() + 2) * divSlide + .5;
-			var speed = ModuleDefaults.speed * 1000;
+			var speed = options.speed * 1000;
 			$td2_content.animate({
 				left: "+=" + srcollWidth + ""
 			}, speed);
@@ -350,10 +352,11 @@ var Module = function () {
 		value: function onClickRight() {
 			var self = this;
 			var $this = this.$ele;
+			var options = this.option;
 			var $td2_content = $this.find('.td2_content');
-			var divSlide = ModuleDefaults.count.slide;
+			var divSlide = options.count.slide;
 			var srcollWidth = ($('.td2_content').width() + 2) * divSlide + .5;
-			var speed = ModuleDefaults.speed * 1000;
+			var speed = options.speed * 1000;
 			$td2_content.animate({
 				left: "-=" + srcollWidth + ""
 			}, speed);
@@ -401,14 +404,6 @@ var Module = function () {
 				$this.find('.left_air:nth-child(' + title_active + ')').addClass('air_color');
 
 				//左 桌機
-
-
-				$this.find('.td1_left_m').removeClass('air_color');
-				$this.find('.td1_left_m').children('div:first-child').addClass('display_n');
-				$this.find('.td1_left_m:nth-child(' + title_active + ')').children().removeClass('display_n');
-				$this.find('.td1_left_m:nth-child(' + title_active + ')').addClass('air_color');
-
-				//左 手機
 			});
 		}
 	}]);
