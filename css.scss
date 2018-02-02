@@ -41,18 +41,16 @@ $classname: 'frzTable';
 		height: 60px;
 		line-height: 60px;
 		border: 1px solid #e2e2e2;
+		// display: flex;
+		// align-items:center;
+			.left_date{
+				height: 30px;
+				line-height: 30px;
+			}
 		}
 	}
 	.td1_left_m{
 		@extend .td1_left;
-		height: 70px;
-		display: flex;
-		flex-wrap: wrap;
-		.date_m{
-			width: 100%;
-			height: 20px;
-			line-height: 20px;
-		}
 	}	
 	.td2_wrap{
 		position: relative;
@@ -86,6 +84,7 @@ $classname: 'frzTable';
 		margin-top: -20px;
 		padding:10px 0px;
 		cursor: pointer;
+		display: block;
 	}
 	.slide_right{
 		right: 0;
@@ -166,21 +165,34 @@ $classname: 'frzTable';
 	.air_td2_content{
 		@extend .td2_content;
 	}
+	.left_air{
+		position: relative;
+	}
 	.air_box{
-		margin-top: -72px;
-		margin-left: 45px;
+		position: absolute;
+		top: -10px;
+		left:70%;
+		
 		.ic-ln{
 			color: #ff8e26;
 			font-size: 14px;
 		}
 
 	}
-	@media screen and (min-width: $screen-phone) {
+	.air_box_m{
+		@extend .air_box;
+	}
+	.air_box_m_head {
+		@extend .air_box_m ;
+		left:80%;
+	}
+	@media screen and (min-width: $screen-phone) { // 手機 320px
 		.td2_wrap{
 			width: 320px;
 		}
 		.td1_left_m{
 			font-size: 12px;
+			position: relative;
 		}
 		.go{
 			font-size: 12px;
@@ -191,17 +203,31 @@ $classname: 'frzTable';
 			display: block;
 		}
 	}
-	@media screen and (min-width: $screen-tablet) {
+	@media screen and (min-width: $screen-tablet) { // 平板 768px
 		.td2_wrap{
 			width: 650px;
 		}
+		.slide_btn{
+			display: none;
+		}
 	}
-	@media screen and (min-width: $screen-desktop) {
+	@media screen and (min-width: $screen-desktop) { // 筆電、桌機 980px
 		.td2_wrap{
 			width: 850px;
 		}
+		.left_date{
+			width: 100%;
+		}
+		.td1_left{
+
+			.left_date{
+				height: 40px;
+				line-height: 40px;
+			}
+		}						
+
 	}
-	@media screen and (min-width: $screen-lg-desktop) {
+	@media screen and (min-width: $screen-lg-desktop) { // 較大桌機　1280px
 		.td2_wrap{
 			width: 1050px;
 		}
