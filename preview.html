@@ -28,18 +28,6 @@
                             <div class="sliderBall"></div>
                         </div>
                         <tr>
-                            <!-- <td class="td1_title col-xs-3 col-sm-2 col-md-2 col-lg-2 hidden-md hidden-lg"> -->
-                                <!-- <div><=980左欄 -->
-                                   <!--  <div class="title_bg"><div class='back'>回程</div><div class="go">去程</div></div>
-                                    <div class="td1_left_m"><div class="date_m">12/27</div><div class="date_m">(三)</div></div>
-                                    <div class="td1_left_m"><div class="date_m">12/28</div><div class="date_m">(四)</div></div>
-                                    <div class="td1_left_m"><div class="date_m">12/29</div><div class="date_m">(五)</div></div>
-                                    <div class="td1_left_m"><div class="date_m">12/30</div><div class="date_m">(六)</div></div>
-                                    <div class="td1_left_m"><div class="date_m">12/31</div><div class="date_m">(日)</div></div>
-                                    <div class="td1_left_m"><div class="new_year">2018</div><div class="date_m">01/01</div><div class="date_m">(一)</div></div>
-                                    <div class="td1_left_m"><div class="date_m">01/02</div><div class="date_m">(二)</div></div> -->
-                                <!-- </div><=980左欄 -->
-                            <!-- </td> -->
                             <td class="td1_title col-xs-3 col-sm-2 col-md-2 col-lg-2 ">
                                 <div><!-- 桌機左欄 -->
                                     <div class="title_bg"><div class='back'>回程</div><div class="go">去程</div></div>
@@ -153,17 +141,6 @@
                             <div class="sliderBall"></div>
                         </div>
                         <tr>
-                            <!-- <td class="td1_title col-xs-5 col-sm-2 col-md-2 col-lg-2 hidden-md hidden-lg"> -->
-                                <!-- <div><=980左欄 -->
-<!--                                     <div class="title_bg"><div class='back'>目的地→</div><div class="go">↓出發地</div></div>
-                                    <div class="td1_left_m"><div class="air_box_m display_n"><i class="icon ic-ln">&#xe6a7;</i></div><div class="big_text air_text">TPE</div><div class="air_text">桃園機場</div>
-                                    </div>
-                                    <div class="td1_left_m"><div class="air_box_m display_n"><i class="icon ic-ln">&#xe6a7;</i></div><div class="big_text air_text">HKG</div><div class="air_text">桃園機場</div>
-                                    </div>
-                                    <div class="td1_left_m"><div class="air_box_m display_n"><i class="icon ic-ln">&#xe6a7;</i></div><div class="big_text air_text">PVG</div><div class="air_text">桃園機場</div>
-                                    </div> -->
-                                <!-- </div><=980左欄 -->
-                            <!-- </td> -->
                             <td class="td1_title col-xs-5 col-sm-2 col-md-2 col-lg-2 ">
                                 <div><!-- 桌機左欄 -->
                                     <div class="title_bg"><div class='back'>目的地→</div><div class="go">↓出發地</div></div>
@@ -230,11 +207,15 @@
 <script src="./module.js"></script>
 <script>
 $(function() {
-	$('.frzTable').frzTable({
-		whenClick: function($element) {
-
-    }
-	})
+    $('.frzTable.default').frzTable({
+        count: {
+            slide: 2, // [number] 
+            show: 3 // [number] 
+        },
+        speed: .3, // [number] 
+        whenClick: function($element) {
+        }
+    });
 });
 </script>
 <script type="text/javascript" src="module.js"></script></body>
