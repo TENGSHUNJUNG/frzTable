@@ -188,7 +188,7 @@ $classname: 'frzTable';
 	}
 	@media screen and (min-width: $screen-phone) { // 手機 320px
 		.td2_wrap{
-			width: 320px;
+			// width: 320px;
 		}
 		.td1_left_m{
 			font-size: 12px;
@@ -205,7 +205,7 @@ $classname: 'frzTable';
 	}
 	@media screen and (min-width: $screen-tablet) { // 平板 768px
 		.td2_wrap{
-			width: 650px;
+			width: 768px;
 		}
 		.slide_btn{
 			display: none;
@@ -213,7 +213,7 @@ $classname: 'frzTable';
 	}
 	@media screen and (min-width: $screen-desktop) { // 筆電、桌機 980px
 		.td2_wrap{
-			width: 850px;
+			width: 960px;
 		}
 		.left_date{
 			width: 100%;
@@ -229,7 +229,7 @@ $classname: 'frzTable';
 	}
 	@media screen and (min-width: $screen-lg-desktop) { // 較大桌機　1280px
 		.td2_wrap{
-			width: 1050px;
+			width: 1200px;
 		}
 	}
 	&.#{$classname}_default {

@@ -302,6 +302,7 @@ var Module = function () {
 
 			$this.find(".sliderBall:first-child").addClass('activeBall');
 
+			// this.rwdContainer();
 			this.changeWindow();
 			this.onClickDiv();
 			this.airOnClick();
@@ -312,13 +313,20 @@ var Module = function () {
 			var self = this;
 			var $this = this.$ele;
 			var $td2_content = $this.find('.td2_content');
-			var windowWidth = $(window).width();
+
+			self.rwdContainer();
 			var divShow = $(".td2_wrap").width() / 7 - 2;
-			if (windowWidth >= 768) {
-				$td2_content.width(divShow);
-			} else {
-				self.showDiv();
-			}
+			$td2_content.width(divShow);
+
+			$(window).resize(function () {
+				var windowWidth = $(window).width();
+				if (windowWidth >= 768) {
+					self.rwdContainer();
+					$td2_content.width(divShow);
+				} else {
+					self.showDiv();
+				}
+			});
 		}
 	}, {
 		key: 'showDiv',
@@ -331,7 +339,16 @@ var Module = function () {
 			var show = options.count.show;
 			var divShow = $(".td2_wrap").width() / show;
 			$td2_content.width(divShow);
+			self.rwdContainer();
 			$td2_box.width(divShow * 7);
+		}
+	}, {
+		key: 'rwdContainer',
+		value: function rwdContainer() {
+			var self = this;
+			var $this = this.$ele;
+			var rwdContainer = $('.container').width() - 80;
+			$this.find('.td2_wrap').width(rwdContainer);
 		}
 	}, {
 		key: 'onClickLeft',
