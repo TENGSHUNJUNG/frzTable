@@ -67,6 +67,12 @@ $classname: 'frzTable';
 				border: 1px solid #e2e2e2;
 				}
 		}
+		.air_td2_box{
+			@extend .td2_box;
+		}
+	}
+	.air_td2_wrap{
+		@extend .td2_wrap ;
 	}
 	.active{
 		border:1px solid #fe8b88!important;
@@ -186,10 +192,10 @@ $classname: 'frzTable';
 		@extend .air_box_m ;
 		left:80%;
 	}
+	.click_n{
+		pointer-events:none;
+	}
 	@media screen and (min-width: $screen-phone) { // 手機 320px
-		.td2_wrap{
-			width: 320px;
-		}
 		.td1_left_m{
 			font-size: 12px;
 			position: relative;
@@ -204,17 +210,11 @@ $classname: 'frzTable';
 		}
 	}
 	@media screen and (min-width: $screen-tablet) { // 平板 768px
-		.td2_wrap{
-			width: 650px;
-		}
 		.slide_btn{
 			display: none;
 		}
 	}
 	@media screen and (min-width: $screen-desktop) { // 筆電、桌機 980px
-		.td2_wrap{
-			width: 850px;
-		}
 		.left_date{
 			width: 100%;
 		}
@@ -228,9 +228,7 @@ $classname: 'frzTable';
 
 	}
 	@media screen and (min-width: $screen-lg-desktop) { // 較大桌機　1280px
-		.td2_wrap{
-			width: 1050px;
-		}
+
 	}
 	&.#{$classname}_default {
 		

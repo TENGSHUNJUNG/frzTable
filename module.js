@@ -313,12 +313,27 @@ var Module = function () {
 			var $this = this.$ele;
 			var $td2_content = $this.find('.td2_content');
 			var windowWidth = $(window).width();
-			var divShow = $(".td2_wrap").width() / 7 - 2;
+			self.rwdContainer();
+
 			if (windowWidth >= 768) {
+				self.rwdContainer();
+				var divShow = $(".td2_wrap").width() / 7 - 2;
+				var air_divShow = $('.air_td2_wrap').width() / 7 - 2;
 				$td2_content.width(divShow);
 			} else {
 				self.showDiv();
 			}
+
+			$(window).resize(function () {
+				var windowWidth = $(window).width();
+				if (windowWidth >= 768) {
+					self.rwdContainer();
+					var _divShow = $(".td2_wrap").width() / 7 - 2;
+					$td2_content.width(_divShow);
+				} else {
+					self.showDiv();
+				}
+			});
 		}
 	}, {
 		key: 'showDiv',
@@ -330,8 +345,19 @@ var Module = function () {
 			var $td2_box = $this.find('.td2_box');
 			var show = options.count.show;
 			var divShow = $(".td2_wrap").width() / show;
+
 			$td2_content.width(divShow);
+			self.rwdContainer();
 			$td2_box.width(divShow * 7);
+		}
+	}, {
+		key: 'rwdContainer',
+		value: function rwdContainer() {
+			var self = this;
+			var $this = this.$ele;
+			var rwdContainer = $('.container').width() - $this.find('.td1_title').width();
+			$this.find('.td2_wrap').width(rwdContainer);
+			$this.find('.air_td2_wrap').width(rwdContainer);
 		}
 	}, {
 		key: 'onClickLeft',
@@ -340,8 +366,10 @@ var Module = function () {
 			var $this = this.$ele;
 			var options = this.option;
 			var $td2_content = $this.find('.td2_content');
+			var $air_td2_content = $this.find('.air_td2_content');
 			var divSlide = options.count.slide;
 			var srcollWidth = ($td2_content.width() + 2) * divSlide + .5;
+			var air_srcollWidth = ($air_td2_content.width() + 2) * divSlide + .5;
 			var speed = options.speed * 1000;
 			$td2_content.animate({
 				left: "+=" + srcollWidth + ""
@@ -354,8 +382,10 @@ var Module = function () {
 			var $this = this.$ele;
 			var options = this.option;
 			var $td2_content = $this.find('.td2_content');
+			var $air_td2_content = $this.find('.air_td2_content');
 			var divSlide = options.count.slide;
 			var srcollWidth = ($('.td2_content').width() + 2) * divSlide + .5;
+			var air_srcollWidth = ($air_td2_content.width() + 2) * divSlide + .5;
 			var speed = options.speed * 1000;
 			$td2_content.animate({
 				left: "-=" + srcollWidth + ""
