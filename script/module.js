@@ -116,7 +116,7 @@ class Module {
 		$this.find(".sliderBall:first-child").addClass('activeBall');
 
 		
-		// this.rwdContainer();
+		
 		this.changeWindow();
 		this.onClickDiv();
 		this.airOnClick();
@@ -134,16 +134,24 @@ class Module {
 		let self = this ;
 		let $this = this.$ele;
 		let $td2_content = $this.find( '.td2_content' ) ;
-		
-
+		let windowWidth = $(window).width();
 		self.rwdContainer();
-		let  divShow = ( $(".td2_wrap").width() / 7 ) -2 ;
-		$td2_content.width(divShow);
+
+		if(windowWidth >= 768){
+			self.rwdContainer();
+			let  divShow = ( $(".td2_wrap").width() / 7 ) -2 ;
+			$td2_content.width(divShow);
+		}else{
+			self.showDiv();
+		}
+
+
 
 		$(window).resize(function(){
 			let windowWidth = $(window).width();
 			if(windowWidth >= 768){
 				self.rwdContainer();
+				let  divShow = ( $(".td2_wrap").width() / 7 ) -2 ;
 				$td2_content.width(divShow);
 			}else{
 				self.showDiv();
@@ -170,7 +178,7 @@ class Module {
 	rwdContainer () {
 		let self = this ;
 		let $this = this.$ele;
-		let rwdContainer = $('.container').width()-80 ;
+		let rwdContainer = $('.container').width()-100 ;
 		$this.find('.td2_wrap').width(rwdContainer);
 
 	}
@@ -220,6 +228,8 @@ class Module {
 	    	$this.find('.sliderBall:nth-child('+ thisDiv +')').addClass('activeBall').siblings().removeClass('activeBall');
 	    });
 	}
+
+
 	airOnClick () {
 		let self = this ;
 		let $this = this.$ele

@@ -67,6 +67,9 @@ $classname: 'frzTable';
 				border: 1px solid #e2e2e2;
 				}
 		}
+		.air_td2_box{
+			@extend .td2_box;
+		}
 	}
 	.active{
 		border:1px solid #fe8b88!important;

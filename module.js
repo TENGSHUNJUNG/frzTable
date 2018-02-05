@@ -302,7 +302,6 @@ var Module = function () {
 
 			$this.find(".sliderBall:first-child").addClass('activeBall');
 
-			// this.rwdContainer();
 			this.changeWindow();
 			this.onClickDiv();
 			this.airOnClick();
@@ -313,16 +312,23 @@ var Module = function () {
 			var self = this;
 			var $this = this.$ele;
 			var $td2_content = $this.find('.td2_content');
-
+			var windowWidth = $(window).width();
 			self.rwdContainer();
-			var divShow = $(".td2_wrap").width() / 7 - 2;
-			$td2_content.width(divShow);
+
+			if (windowWidth >= 768) {
+				self.rwdContainer();
+				var divShow = $(".td2_wrap").width() / 7 - 2;
+				$td2_content.width(divShow);
+			} else {
+				self.showDiv();
+			}
 
 			$(window).resize(function () {
 				var windowWidth = $(window).width();
 				if (windowWidth >= 768) {
 					self.rwdContainer();
-					$td2_content.width(divShow);
+					var _divShow = $(".td2_wrap").width() / 7 - 2;
+					$td2_content.width(_divShow);
 				} else {
 					self.showDiv();
 				}
@@ -347,7 +353,7 @@ var Module = function () {
 		value: function rwdContainer() {
 			var self = this;
 			var $this = this.$ele;
-			var rwdContainer = $('.container').width() - 80;
+			var rwdContainer = $('.container').width() - 100;
 			$this.find('.td2_wrap').width(rwdContainer);
 		}
 	}, {
