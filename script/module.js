@@ -125,11 +125,6 @@ class Module {
 
 
 
-
-
-
-
-
 	changeWindow () {
 		let self = this ;
 		let $this = this.$ele;
@@ -139,7 +134,8 @@ class Module {
 
 		if(windowWidth >= 768){
 			self.rwdContainer();
-			let  divShow = ( $(".td2_wrap").width() / 7 ) -2 ;
+			let divShow = ( $(".td2_wrap").width() / 7 ) -2 ;
+			let air_divShow = ($('.air_td2_wrap').width() / 7) -2 ;
 			$td2_content.width(divShow);
 		}else{
 			self.showDiv();
@@ -168,6 +164,7 @@ class Module {
 		let $td2_box = $this.find('.td2_box');
 		let show = options.count.show;
 		let divShow = ( $(".td2_wrap").width() / show ) ;
+
 		$td2_content.width(divShow);
 		self.rwdContainer();
 		$td2_box.width( divShow * 7 );
@@ -178,8 +175,9 @@ class Module {
 	rwdContainer () {
 		let self = this ;
 		let $this = this.$ele;
-		let rwdContainer = $('.container').width()-100 ;
+		let rwdContainer = $('.container').width() - $this.find('.td1_title').width() ;
 		$this.find('.td2_wrap').width(rwdContainer);
+		$this.find('.air_td2_wrap').width(rwdContainer);
 
 	}
 
@@ -190,12 +188,14 @@ class Module {
 		let $this = this.$ele;
 		let options = this.option;
 		let $td2_content = $this.find( '.td2_content' ) ;
-		let divSlide = options.count.slide;
-		let srcollWidth = ($td2_content.width() + 2) * divSlide + .5;
+		let $air_td2_content = $this.find( '.air_td2_content' );
+		let divSlide = options.count.slide ;
+		let srcollWidth = ($td2_content.width() + 2) * divSlide + .5 ;
+		let air_srcollWidth = ($air_td2_content.width() + 2) * divSlide + .5 ;
 		let speed = options.speed * 1000;
 			$td2_content.animate({
 				left: "+="+ srcollWidth +"",
-			},speed);
+			},speed) ;
 	}
 
 
@@ -204,12 +204,14 @@ class Module {
 		let $this = this.$ele;
 		let options = this.option;
 		let $td2_content = $this.find( '.td2_content' ) ;
+		let $air_td2_content = $this.find( '.air_td2_content' );
 		let divSlide = options.count.slide;
-		let srcollWidth = ($('.td2_content').width() + 2) * divSlide + .5;
-		let speed = options.speed*1000;
+		let srcollWidth = ($('.td2_content').width() + 2) * divSlide + .5 ;
+		let air_srcollWidth = ($air_td2_content.width() + 2) * divSlide + .5 ;
+		let speed = options.speed * 1000 ;
 			$td2_content.animate({
 				left: "-="+ srcollWidth +"",
-			},speed);
+			},speed) ;
 	}
 
 
